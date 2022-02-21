@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+{% import "bootstrap/wtf.html" as wtf %}
+    <section>  
+        <div class="container">
+            <div class="row">
+                
+                <div class = "col-12">
+                    <h1>Checkout </h1>
+                    <p>
+                        Thank you for your interest. Please provide your details so that someone from our sales team can contact you to finalise details and take payment. Thank you! 
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class = "col-6">
+                    {{wtf.quick_form(form)}}
+                </div>
+                {% with messages = get_flashed_messages() %}
+                
+  {% if messages %}
+    
+    {% for message in messages %}
+      <h1>{{ message }}</h1>
+    {% endfor %}
+    </div>
+    
+  {% endif %}
+  
+{% endwith %}
+
+{% block body %}{% endblock %}
+<footer>
+            </div>
+        </div>
+    </section>
+    <div>
+        <a href="/Cart" class="btn btn-primary mr-sm-2">Return to Cart</a>
+        <a href="/PetShop" class="btn btn-primary mr-4">Continue Shopping</a>
+    
+        </div>
+    </footer>
+{% endblock %}

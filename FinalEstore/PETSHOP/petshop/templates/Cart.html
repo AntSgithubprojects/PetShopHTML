@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- display contents of user basket -->
+<section>  
+    <div class="container">
+        <div class="row co-12 d-flex mt-2 mb-2">
+            <h3>Shopping Basket</h3>
+        </div>
+       </div>
+        <!-- each product on seperate row -->
+        {% for Product in order.products %}
+            <div class="row shadow-md my-row mb-3">
+                <div class="col-sm-10 card">
+                    <h5 class="card-header">{{Product.name}}</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2">
+                                <img class="img-thumbnail" src="{{url_for('static', filename='img/'+ Product.image)}}">                               
+                            </div>
+                            <div class="col-10">
+                                <!-- Item Description -->                   
+                                <p class="card-text">{{Product.description}}</p>   
+                            </div>  
+                        </div>                      
+                    </div>
+                </div>
+                <br><br>
+                <!-- right column has price and delete button -->
+                <div class="col-sm-2">
+                    <!-- delete item button -->                       
+                        <h6>{{"$%.2f"|format(Product.price)}}</h6>                      
+                        <form method="POST" action="{{url_for('main.deleteorderitem')}}">
+                            <input type="hidden" id="id" name="id" value="product.id">
+                            <input type="submit" value="Delete" class="btn btn-primary mb-3">
+                        </form> 
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+            </section>
+    <!-- total price and page controls -->
+        <section>
+            <div class="row co-12 d-flex">
+                <h5 class="card-body"> Price = {{ "$%.2f"|format(totalprice) }} </h5>
+                
+            </div>
+        
+            <div class="row co-12 d-flex mt-2 mb-4">
+                <a href="PetShop" class="btn btn-primary mr-4">Continue Shopping</a>
+                <a href="{{ url_for('main.checkout') }}" class="btn btn-primary mr-4">Checkout</a>
+                <a href="{{ url_for('main.deleteorder') }}" class="btn btn-primary">Empty Basket</a>
+            </div>
+        </section>
+    </div>
+   
+</section>
+
+{% endblock %}
+
+
+
